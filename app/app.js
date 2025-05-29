@@ -5,16 +5,16 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-// Routes
+
 const usersRoute = require('./routes/users-route');
 
-// Initialize app
+
 const app = express();
 
-// Middleware
+
 app.use(bodyParser.json());
 
-// Routes
+
 app.use('/admin/users', usersRoute);
 
 // Constants
