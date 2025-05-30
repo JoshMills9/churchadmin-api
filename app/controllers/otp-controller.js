@@ -3,7 +3,7 @@ const parsePhoneNumberFromString = require('libphonenumber-js')
 
 
 const generateOtp = (req, res, next) => {
-    const {phoneNumber} = req.body
+    const {phoneNumber, churchName} = req.body
 
     if (!phoneNumber) {
         return res.json({ error: 'Phone number is required' }, { status: 400 });
@@ -21,7 +21,8 @@ const generateOtp = (req, res, next) => {
 
      const value = {
         code,
-        number
+        number,
+        churchName
       }
       res.status(200).json(value)
     }
