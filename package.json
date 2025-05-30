@@ -4,8 +4,7 @@
   "description": "Church Admin Backend API",
   "main": "app/app.js",
   "scripts": {
-    "start": "node app/app.js",
-    "heroku-postbuild": "echo 'No build step needed'"
+    "start": "node app/app.js"
   },
   "keywords": [],
   "author": "Nemes!s",
