@@ -7,15 +7,16 @@ dotenv.config();
 
 
 const usersRoute = require('./routes/users-route');
-
+const otpRoute = require('./routes/otp-generator')
 
 const app = express();
 
 
 app.use(bodyParser.json());
 
-
+app.use('/admin/otp', otpRoute);
 app.use('/admin/users', usersRoute);
+
 
 // Constants
 const MONGO_URI = process.env.MONGODB_KEY;
