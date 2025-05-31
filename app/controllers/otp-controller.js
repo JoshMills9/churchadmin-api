@@ -21,16 +21,14 @@ const generateOtp = async(req, res, next) => {
 
     try{
         const existing = await User.findOne({ phone: phone });
-        if(!existing){
-            const value = {
-                code,
-                phone,
-                churchName
-              }
-              res.status(200).json(value)
-        }else{
+        
+        if(existing){
             throw new Error('You aleady have an account. Please login')
         }
+            
+
+    const value = { code, phone, churchName }
+    res.status(200).json(value)
     }catch(err){
         console.log(err)
     }
