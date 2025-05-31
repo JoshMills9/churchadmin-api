@@ -18,11 +18,11 @@ const createUser = async (req, res, next) => {
           church: churchName,
           phone,
           user: `@${churchName.toLowerCase()}`,
+          img: '',
           posts: [],
           events: [],
           followers: [],
-
-            });
+          });
 
       await createdUser.save();
       res.json({user: createdUser})
