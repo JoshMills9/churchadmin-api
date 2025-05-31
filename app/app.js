@@ -18,6 +18,17 @@ app.use('/admin/otp', otpRoute);
 app.use('/admin/users', usersRoute);
 
 
+app.use((error, req, resizeBy, next) => {
+  if(res.headerSent){
+    return next(error)
+  }
+
+  res.status(error.code || 500)
+  res.json({message: error.message || 'An unknown error occurred.'})
+}
+)
+
+
 // Constants
 const MONGO_URI = process.env.MONGODB_KEY;
 const PORT = process.env.PORT || 3000;
