@@ -29,7 +29,6 @@ const generateOtp = async(req, res, next) => {
               }
               res.status(200).json(value)
         }else{
-            res.json({error: 'You aleady have an account. Please login' })
             throw new Error('You aleady have an account. Please login')
         }
     }catch(err){
