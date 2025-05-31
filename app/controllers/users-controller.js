@@ -44,7 +44,7 @@ const logInUser = async(req, res, next) => {
     if(!foundUser){
       throw new Error('Account not found. Please signup.')
     }
-    res.status(201).json(foundUser)
+    res.json(foundUser)
   }catch(err){
     throw new Error(err)
   }

@@ -30,9 +30,6 @@ const generateOtp = async(req, res, next) => {
             res.status(200).json(value)
         }
             
-
-    const value = { code, phone, churchName }
-    res.status(200).json(value)
     }catch(err){
         throw new Error(err)
     }
