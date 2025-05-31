@@ -3,7 +3,7 @@ const User = require('../models/usersSchema')
 
 
 const generateOtp = async(req, res, next) => {
-    const {phoneNumber, churchName} = req.body
+    const {phoneNumber, churchName, isSignup} = req.body
 
     if (!phoneNumber) {
         return res.json({ error: 'Phone number is required' }, { status: 400 });
@@ -20,10 +20,15 @@ const generateOtp = async(req, res, next) => {
      const phone = (formatPhone(phoneNumber))
 
     try{
-        const existing = await User.findOne({ phone: phone });
-        
-        if(existing){
-            return ('You aleady have an account. Please login')
+
+        if(!isSignup){
+            const value = { code, phone, churchName }
+            res.status(200).json(value)
+        }else{
+            const existing = await User.findOne({ phone: phone });
+            if(existing){
+                return ('You aleady have an account. Please login')
+            }
         }
             
 
