@@ -39,6 +39,8 @@ const createUser = async (req, res, next) => {
 
 const logInUser = async(req, res, next) => {
   const {phoneNumber} = req.body;
+
+  console.log(phoneNumber)
   try{
     const foundUser = await User.findOne({phone: phoneNumber})
     if(!foundUser){
