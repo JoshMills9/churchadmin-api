@@ -15,7 +15,7 @@ const createUser = async (req, res, next) => {
 
     try{
       const createdUser = new User({
-          churchName,
+          church: churchName,
           phone,
           user: `@${churchName.toLowerCase()}`,
           posts: [],
