@@ -12,14 +12,16 @@ const getUsers = async (req, res, next) => {
 
 const createUser = async (req, res, next) => {
   const { phone, churchName } = req.body;
-console.log(phone)
+
     try{
       const createdUser = new User({
-          church: churchName, 
-          phone: phone,
+          churchName,
+          phone,
+          user: `@${churchName.toLowerCase()}`,
           posts: [],
           events: [],
-          followers: [], 
+          followers: [],
+
             });
 
       await createdUser.save();
