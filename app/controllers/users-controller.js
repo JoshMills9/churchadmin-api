@@ -9,6 +9,10 @@ const getUsers = async (req, res, next) => {
     res.json(users)
 }
 
+const getUserById = async(req, res, next) => {
+  const userId = req.params.uid;
+}
+
 
 const createUser = async (req, res, next) => {
   const { phone, churchName } = req.body;
@@ -28,8 +32,22 @@ const createUser = async (req, res, next) => {
       res.json({user: createdUser})
       
     }catch(err){
-        console.log(err)
+        throw new Error(err)
     }
+}
+
+
+const logInUser = async(req, res, next) => {
+  const {phoneNumber} = req.body;
+  try{
+    const foundUser = await User.findOne({phone: phoneNumber})
+    if(!foundUser){
+      throw new Error('Account not found. Please signup.')
+    }
+    res.status(201).json(foundUser)
+  }catch(err){
+    throw new Error(err)
+  }
 }
 
 const removeUser = async(req, res, next) => {
@@ -41,4 +59,5 @@ const removeUser = async(req, res, next) => {
 
 exports.getUsers = getUsers;
 exports.createUser = createUser;
+exports.logInUser = logInUser;
 exports.removeUser = removeUser;
