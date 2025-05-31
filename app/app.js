@@ -18,7 +18,7 @@ app.use('/admin/otp', otpRoute);
 app.use('/admin/users', usersRoute);
 
 
-app.use((error, req, resizeBy, next) => {
+app.use((error, req, res, next) => {
   if(res.headerSent){
     return next(error)
   }
