@@ -4,7 +4,7 @@ const User = require('../models/usersSchema')
 
 const generateOtp = async(req, res, next) => {
     const {phoneNumber, churchName} = req.body
-    console.log(phoneNumber)
+
     if (!phoneNumber) {
         return res.json({ error: 'Phone number is required' }, { status: 400 });
       }
@@ -32,7 +32,7 @@ const generateOtp = async(req, res, next) => {
             throw new Error('You aleady have an account. Please login')
         }
     }catch(err){
-        throw new Error('Server failed')
+        console.log(err)
     }
     }
 } 
