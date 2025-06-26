@@ -6,8 +6,10 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 
-const usersRoute = require('./routes/users-route');
+const usersRoute = require('./routes/users-route')
 const otpRoute = require('./routes/otp-generator')
+const membersRoute = require('./routes/members-route')
+const postsRoute = require('./routes/posts-route')
 
 const app = express();
 
@@ -16,6 +18,8 @@ app.use(bodyParser.json());
 
 app.use('/admin/otp', otpRoute);
 app.use('/admin/users', usersRoute);
+app.use('/admin/members', membersRoute)
+app.use('/admin/posts', postsRoute)
 
 
 app.use((error, req, res, next) => {
@@ -29,11 +33,11 @@ app.use((error, req, res, next) => {
 )
 
 
-// Constants
 const MONGO_URI = process.env.MONGODB_KEY;
 const PORT = process.env.PORT || 3000;
 
-// MongoDB connection and server start
+
+
 mongoose
   .connect(MONGO_URI)
   .then(() => {
