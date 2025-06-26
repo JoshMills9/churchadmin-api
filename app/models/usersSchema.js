@@ -21,6 +21,7 @@ const userSchema = new mongoose.Schema({
     events: {type: [eventsSchema], required: false},
 
     followers: {type: Array, required: false},
+    following: {type: Array, required: false},
     notificaitons: {type: Array, required: false},
 
     isSubscribed: {type: Boolean, required: false}

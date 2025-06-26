@@ -8,9 +8,9 @@ router.get('/:mid',  postsController.posts);
 
 router.post('/:mid', postsController.createPost);
 
-router.patch('/:mid', postsController.updateMember);
+router.patch('/:mid', postsController.updatePost);
 
-router.delete('/:mid', postsController.removeMember)
+router.delete('/:mid', postsController.removePost)
 
 
 module.exports = router;

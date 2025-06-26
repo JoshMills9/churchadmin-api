@@ -10,6 +10,7 @@ const usersRoute = require('./routes/users-route')
 const otpRoute = require('./routes/otp-generator')
 const membersRoute = require('./routes/members-route')
 const postsRoute = require('./routes/posts-route')
+const eventsRoute = require('./routes/events-route')
 
 const app = express();
 
@@ -20,6 +21,8 @@ app.use('/admin/otp', otpRoute);
 app.use('/admin/users', usersRoute);
 app.use('/admin/members', membersRoute)
 app.use('/admin/posts', postsRoute)
+app.use('/admin/events', postsRoute)
+
 
 
 app.use((error, req, res, next) => {

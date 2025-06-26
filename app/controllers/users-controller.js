@@ -33,6 +33,7 @@ const createUser = async (req, res, next) => {
           posts: [],
           events: [],
           followers: [],
+          following: [],
           });
 
       await createdUser.save();

@@ -10,7 +10,7 @@ const posts = async(req, res, next) => {
 }
 
 const createPost = async(req, res, next) => {
-    const {img, bg, text, vid, audio, title, tagged, comments, blessed, shared} = req.body;
+    const {img, bg, text, vid, audio, title, } = req.body;
     
     const userId = req.params.mid;  
 
@@ -21,10 +21,11 @@ const createPost = async(req, res, next) => {
             vid,
             audio,
             title,
-            tagged,
-            comments,
-            blessed,
-            shared
+            tagged: [],
+            comments: [],
+            isBlessed: false,
+            blessed: [],
+            shared: []
         }
   
 
@@ -40,38 +41,34 @@ const createPost = async(req, res, next) => {
 }
 
 
-const updateMember = async(req, res, next) => {
+const updatePost = async(req, res, next) => {
     const userId = req.params.mid;   
-    const {Firstname, Lastname, DoB ,RegDate, Phone1, Phone2, Email, Residential, Marital, 
-        NoChildren, Department, Occupation, isVisitor, isBaptised, Photo} = req.body;
+    const {id, img, bg, text, vid, audio, title, tagged, comments, blessed, shared, isBlessed} = req.body;
      
     const user = await User.findById(userId);
 
-    const member = {
-            Firstname,
-            Lastname,
-            DoB,
-            RegDate,
-            Phone1,
-            Phone2,
-            Email,
-            Residential,
-            Marital,
-            NoChildren,
-            Department,
-            Occupation,
-            isVisitor,
-            isBaptised,
-            Photo
+    const post = {
+        img,
+        bg,
+        text,
+        vid,
+        audio,
+        title,
+        tagged,
+        comments,
+        isBlessed,
+        blessed,
+        shared
     }
-    
-    const foundMember = user.members.Firstname(Firstname);
 
-    if(foundMember){
+    
+    const foundPost = user.posts.id(id);
+
+    if(foundPost){
         try{
-            foundMember = member;
-            const updatedMember = await user.save();
-            res.status(402).json(updatedMember)
+            foundPost = post;
+            const updatedPost = await user.save();
+            res.status(402).json(updatedPost)
         }catch(err){
             throw new Error('Could not update member data.')
         }
@@ -81,19 +78,19 @@ const updateMember = async(req, res, next) => {
 }
 
 
-const removeMember = async(req, res, next) => {
+const removePost = async(req, res, next) => {
     const userId = req.params.mid;   
-    const {Firstname} = req.body;
+    const {id} = req.body;
      
     const user = await User.findById(userId);
 
     if(user){
         try{
-            user.members.Firstname(Firstname).remove();
-            const removedMember =  await user.save();
-            res.status(200).json(removedMember)
+            user.posts.id(id).remove();
+            const removedPost =  await user.save();
+            res.status(200).json(removedPost)
         }catch(err){
-            throw new Error('Could not remove member.')
+            throw new Error('Could not remove post.')
         }
     }
 
@@ -102,5 +99,5 @@ const removeMember = async(req, res, next) => {
 
 exports.posts = posts;
 exports.createPost = createPost;
-exports.updateMember = updateMember;
-exports.removeMember = removeMember;
+exports.updatePost = updatePost;
+exports.removePost = removePost;

@@ -9,6 +9,7 @@ const postSchema = new mongoose.Schema({
     title: {type: String, required: false},
     audio: {type: String, required: false},
     tagged: {type: Array, required: false},
+    isBlessed: {type: Boolean, required: false},
     comments: {type: Array, required: false},
     blessed: {type: Array, required: false},
     shared: {type: Array, required: false},
