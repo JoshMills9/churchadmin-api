@@ -4,13 +4,13 @@ const eventsController = require('../controllers/events-controller')
 
 const router = express.Router();
 
-router.get('/:mid',  eventsController.events);
+router.get('/:eid',  eventsController.events);
 
-router.post('/:mid', eventsController.createEvent);
+router.post('/:eid', eventsController.createEvent);
 
-router.patch('/:mid', eventsController.updateEvent);
+router.patch('/:eid', eventsController.updateEvent);
 
-router.delete('/:mid', eventsController.removeEvent)
+router.delete('/:eid', eventsController.removeEvent)
 
 
 module.exports = router;

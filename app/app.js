@@ -21,7 +21,7 @@ app.use('/admin/otp', otpRoute);
 app.use('/admin/users', usersRoute);
 app.use('/admin/members', membersRoute)
 app.use('/admin/posts', postsRoute)
-app.use('/admin/events', postsRoute)
+app.use('/admin/events', eventsRoute)
 
 
 

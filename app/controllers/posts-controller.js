@@ -1,7 +1,7 @@
 const User = require('../models/usersSchema')
 
 const posts = async(req, res, next) => {
-    const userId = req.params.mid;    
+    const userId = req.params.pid;    
     const user = await User.findById(userId);
 
     const posts = user.posts;
@@ -12,7 +12,7 @@ const posts = async(req, res, next) => {
 const createPost = async(req, res, next) => {
     const {img, bg, text, vid, audio, title, } = req.body;
     
-    const userId = req.params.mid;  
+    const userId = req.params.pid;  
 
     const post = {
             img,
@@ -32,7 +32,7 @@ const createPost = async(req, res, next) => {
     try{
         const newPost =  await User.findByIdAndUpdate( userId, { $push: {posts: post } }, { new: true } )
         
-        res.status(400).json(newPost);
+        res.status(200).json(newPost);
 
     }catch(err){
         throw new Error('Failed to create post.')
@@ -42,7 +42,7 @@ const createPost = async(req, res, next) => {
 
 
 const updatePost = async(req, res, next) => {
-    const userId = req.params.mid;   
+    const userId = req.params.pid;   
     const {id, img, bg, text, vid, audio, title, tagged, comments, blessed, shared, isBlessed} = req.body;
      
     const user = await User.findById(userId);
@@ -79,7 +79,7 @@ const updatePost = async(req, res, next) => {
 
 
 const removePost = async(req, res, next) => {
-    const userId = req.params.mid;   
+    const userId = req.params.pid;   
     const {id} = req.body;
      
     const user = await User.findById(userId);

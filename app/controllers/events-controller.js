@@ -1,7 +1,7 @@
 const User = require('../models/usersSchema')
 
 const events = async(req, res, next) => {
-    const userId = req.params.mid;    
+    const userId = req.params.eid;    
     const user = await User.findById(userId);
 
     const events = user.events;
@@ -12,7 +12,7 @@ const events = async(req, res, next) => {
 const createEvent = async(req, res, next) => {
     const {startDate, endDate, host, guest, about, title, media, interested, shared} = req.body;
     
-    const userId = req.params.mid;  
+    const userId = req.params.eid;  
 
     const event = {
             title,
@@ -30,7 +30,7 @@ const createEvent = async(req, res, next) => {
     try{
         const newEvent =  await User.findByIdAndUpdate( userId, { $push: {events: event } }, { new: true } )
         
-        res.status(400).json(newEvent);
+        res.status(200).json(newEvent);
 
     }catch(err){
         throw new Error('Failed to create Event.')
@@ -40,7 +40,7 @@ const createEvent = async(req, res, next) => {
 
 
 const updateEvent = async(req, res, next) => {
-    const userId = req.params.mid;   
+    const userId = req.params.eid;   
     const {id, startDate, endDate, host, guest, about, title, media, interested, shared} = req.body;
      
     const user = await User.findById(userId);
@@ -76,7 +76,7 @@ const updateEvent = async(req, res, next) => {
 
 
 const removeEvent = async(req, res, next) => {
-    const userId = req.params.mid;   
+    const userId = req.params.eid;   
     const {id} = req.body;
      
     const user = await User.findById(userId);

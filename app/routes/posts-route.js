@@ -4,13 +4,13 @@ const postsController = require('../controllers/posts-controller')
 
 const router = express.Router();
 
-router.get('/:mid',  postsController.posts);
+router.get('/:pid',  postsController.posts);
 
-router.post('/:mid', postsController.createPost);
+router.post('/:pid', postsController.createPost);
 
-router.patch('/:mid', postsController.updatePost);
+router.patch('/:pid', postsController.updatePost);
 
-router.delete('/:mid', postsController.removePost)
+router.delete('/:pid', postsController.removePost)
 
 
 module.exports = router;
