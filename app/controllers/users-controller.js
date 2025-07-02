@@ -59,30 +59,32 @@ const logInUser = async(req, res, next) => {
   }
 }
 
-const updateUser = async(req, res, next) => {
+const updateUser = async (req, res, next) => {
   const userId = req.params.uid;
-  const {church, phone, img} = req.body;
+  const { church, phone, img } = req.body;
 
-  const foundUser = await User.findById(userId);
+  console.log('Received img:', img); // Debug
 
-  if(!foundUser){
-    throw new Error('User not found.')
+  try {
+    const foundUser = await User.findById(userId);
+
+    if (!foundUser) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    foundUser.church = church;
+    foundUser.phone = phone;
+    foundUser.img = img;
+
+    const updatedUser = await foundUser.save();
+    res.status(200).json(updatedUser);
+
+  } catch (err) {
+    console.error('Update error:', err);
+    res.status(500).json({ message: 'Error updating user info.' });
   }
+};
 
-  try{
-    foundUser.church = church,
-    foundUser.phone = phone,
-    foundUser.img = img
-
-    const updatedUser = await foundUser.save()
-    res.status(402).json(updatedUser)
-    
-  }catch(err){
-    throw new Error('Error updating user info.')
-  }
-  
-
-}
 
 const removeUser = async(req, res, next) => {
   const userId = req.params.uid;
