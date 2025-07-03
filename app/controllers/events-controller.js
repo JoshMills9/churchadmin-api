@@ -10,7 +10,7 @@ const events = async(req, res, next) => {
 }
 
 const createEvent = async(req, res, next) => {
-    const {startDate, endDate, host, guest, about, title, media, interested, shared} = req.body;
+    const {startDate, endDate, host, guest, about, title, vid, img} = req.body;
     
     const userId = req.params.eid;  
 
@@ -21,9 +21,11 @@ const createEvent = async(req, res, next) => {
             host,
             guest,
             about,
-            media,
-            interested,
-            shared
+            vid,
+            img,
+            interested: [],
+            isInterested: false,
+            shared: []
         }
   
 
